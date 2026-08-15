@@ -1,64 +1,165 @@
+/* ================================
+   Ledger — design tokens
+   A financial ledger, not a dashboard:
+   ink, paper, brass, stamped numerals.
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  /* ink & paper */
+  --ink-900: #16241f;
+  --ink-700: #3e5a50;
+  --ink-500: #6b8478;
+  --paper: #f1f0ea;
+  --paper-raised: #fffdf8;
+  --line: #d8d3c3;
+  --line-strong: #b9b29c;
+
+  /* accents */
+  --brass: #c08a28;
+  --brass-dark: #9c6d1c;
+  --forest: #2f6e51;
+  --crimson: #9c3b3b;
+
+  /* type */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --radius: 10px;
+  --shadow-card: 0 1px 2px rgba(22, 36, 31, 0.06), 0 8px 24px rgba(22, 36, 31, 0.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ================================
+   Global
+================================ */
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  font-variant-numeric: tabular-nums;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  color: #222;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--ink-900);
+  background:
+    linear-gradient(180deg, rgba(192, 138, 40, 0.05), transparent 220px),
+    var(--paper);
+  background-attachment: fixed;
 }
 
 button,
 input,
 select {
   font: inherit;
+  color: inherit;
 }
 
 button {
   cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
-/* Navbar */
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+
+/* ================================
+   Navbar
+================================ */
 
 nav {
-  background: #1f2937;
-  color: white;
+  background: var(--ink-900);
+  color: var(--paper-raised);
   padding: 20px 40px;
+  border-bottom: 3px solid var(--brass);
 }
 
 nav h2 {
   max-width: 1100px;
   margin: auto;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 23px;
+  letter-spacing: 0.2px;
 }
 
-/* Main */
+nav h2::before {
+  content: "◈ ";
+  color: var(--brass);
+}
+
+
+/* ================================
+   Main
+================================ */
 
 main {
   max-width: 1100px;
-  margin: 40px auto;
+  margin: 48px auto;
   padding: 0 20px;
 }
 
 main>h1 {
-  font-size: 32px;
-  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+  color: var(--ink-900);
 }
 
 main>p {
-  color: #666;
-  margin-bottom: 30px;
+  color: var(--ink-700);
+  margin-bottom: 32px;
+  font-size: 16px;
 }
 
-/* Form */
+
+/* ================================
+   Form
+================================ */
 
 form {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  background: var(--paper-raised);
+  padding: 30px 28px 26px;
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background-image: linear-gradient(to right, var(--line-strong) 50%, transparent 0%);
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
 }
 
 form>div {
@@ -67,141 +168,369 @@ form>div {
 
 label {
   display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-700);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
 }
 
 input,
 select {
   width: 100%;
-  padding: 11px;
-  border: 1px solid #ddd;
+  padding: 12px 14px;
+  border: 1px solid var(--line-strong);
   border-radius: 7px;
   outline: none;
+  background: var(--paper);
+  color: var(--ink-900);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+input::placeholder {
+  color: var(--ink-500);
+}
+
+input:hover,
+select:hover {
+  border-color: var(--ink-500);
 }
 
 input:focus,
 select:focus {
-  border-color: #2563eb;
+  border-color: var(--brass);
+  background: var(--paper-raised);
+  box-shadow: 0 0 0 3px rgba(192, 138, 40, 0.16);
 }
 
 form button {
-  background: #2563eb;
-  color: white;
+  background: var(--ink-900);
+  color: var(--paper-raised);
   border: none;
-  padding: 11px 18px;
+  padding: 13px 24px;
   border-radius: 7px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 12px rgba(22, 36, 31, 0.2);
 }
 
 form button:hover {
-  background: #1d4ed8;
+  background: var(--brass-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(156, 109, 28, 0.3);
 }
 
-/* Summary */
+
+/* ================================
+   Summary — stamped ledger figures
+================================ */
 
 .summary {
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  gap: 16px;
 }
 
 .summary h2 {
   grid-column: 1 / -1;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink-900);
 }
 
 .summary>div {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-raised);
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.summary>div::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brass);
+  opacity: 0.7;
+}
+
+.summary>div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(22, 36, 31, 0.12);
 }
 
 .summary h3 {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 10px;
+  color: var(--ink-700);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .summary p {
-  font-size: 24px;
-  font-weight: bold;
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--ink-900);
+  letter-spacing: -0.5px;
 }
 
-/* Chart */
+/* Optional hooks: add these classes to income/expense figures
+   to color them like ledger ink — green for credit, crimson for debit. */
+.summary p.positive,
+.summary .positive {
+  color: var(--forest);
+}
+
+.summary p.negative,
+.summary .negative {
+  color: var(--crimson);
+}
+
+
+/* ================================
+   Chart
+================================ */
 
 .chart {
   width: 100%;
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  background: var(--paper-raised);
+  padding: 28px;
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
 }
 
 .chart h2 {
   margin-bottom: 20px;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ink-900);
 }
 
 .chart p {
-  color: #666;
+  color: var(--ink-700);
 }
 
-/* Filters */
+
+/* ================================
+   Filters
+================================ */
 
 .filters {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr auto;
-  gap: 15px;
-  margin-bottom: 30px;
+  gap: 12px;
+  margin-bottom: 28px;
+  align-items: center;
 }
 
-/* Expense List */
-
-.expense-list h2 {
-  margin-bottom: 15px;
+.filters input,
+.filters select {
+  background: var(--paper-raised);
 }
 
-.expense-list>div {
-  background: white;
-  padding: 20px;
-  margin-bottom: 12px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+/* ================================
+   Reset Button
+================================ */
+
+.reset-button {
+  background: transparent;
+  color: var(--ink-700);
+  border: 1px solid var(--line-strong);
+  padding: 12px 18px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.reset-button:hover {
+  background: var(--ink-900);
+  color: var(--paper-raised);
+  border-color: var(--ink-900);
+}
+
+
+/* ================================
+   Expense List — the register
+================================ */
+
+.expense-list {
+  margin-bottom: 44px;
+}
+
+.expense-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink-900);
+}
+
+.expense-list-header h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.expense-list-header p {
+  color: var(--ink-700);
+  font-size: 13px;
+  font-family: var(--font-mono);
+}
+
+
+/* Expense Card — styled like a torn register stub */
+
+.expense-list>div:not(.expense-list-header):not(.empty-state) {
+  position: relative;
+  background: var(--paper-raised);
+  padding: 20px 22px 18px 26px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--brass);
+  box-shadow: 0 2px 8px rgba(22, 23, 31, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.expense-list>div:not(.expense-list-header):not(.empty-state):hover {
+  transform: translateX(2px);
+  border-left-color: var(--brass-dark);
+  box-shadow: 0 6px 18px rgba(22, 23, 31, 0.09);
 }
 
 .expense-list>div p {
   margin-bottom: 6px;
+  color: var(--ink-700);
+  font-size: 14px;
 }
+
+.expense-list>div p strong {
+  color: var(--ink-900);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+
+/* Expense Buttons */
 
 .expense-list button {
   margin-top: 12px;
   margin-right: 8px;
-  padding: 8px 14px;
-  border: none;
+  padding: 7px 14px;
+  border: 1px solid transparent;
   border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .expense-list button:first-of-type {
-  background: #f59e0b;
-  color: white;
+  background: transparent;
+  color: var(--brass-dark);
+  border-color: var(--brass);
+}
+
+.expense-list button:first-of-type:hover {
+  background: var(--brass);
+  color: var(--paper-raised);
 }
 
 .expense-list button:last-of-type {
-  background: #ef4444;
-  color: white;
+  background: transparent;
+  color: var(--crimson);
+  border-color: var(--crimson);
 }
 
-/* Mobile */
+.expense-list button:last-of-type:hover {
+  background: var(--crimson);
+  color: var(--paper-raised);
+}
 
-@media (max-width: 700px) {
+
+/* ================================
+   Empty State
+================================ */
+
+.empty-state {
+  text-align: center;
+  padding: 56px 20px;
+  background: var(--paper-raised);
+  border-radius: var(--radius);
+  border: 1px dashed var(--line-strong);
+}
+
+.empty-state h3 {
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink-900);
+}
+
+.empty-state p {
+  color: var(--ink-700);
+}
+
+
+/* ================================
+   Mobile
+================================ */
+
+@media (max-width: 850px) {
+  .summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reset-button {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 600px) {
   nav {
     padding: 18px 20px;
   }
 
+  nav h2 {
+    font-size: 20px;
+  }
+
   main {
-    margin-top: 25px;
+    margin-top: 32px;
+    padding: 0 15px;
+  }
+
+  main>h1 {
+    font-size: 30px;
+  }
+
+  form {
+    padding: 22px;
   }
 
   .summary {
@@ -213,51 +542,12 @@ form button:hover {
   }
 
   .chart {
-    padding: 15px;
+    padding: 18px;
   }
-}
 
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.empty-state h3 {
-  margin-bottom: 8px;
-  font-size: 20px;
-}
-
-.empty-state p {
-  color: #666;
-}
-
-.expense-list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.expense-list-header h2 {
-  margin: 0;
-}
-
-.expense-list-header p {
-  color: #666;
-  font-size: 14px;
-}
-
-.reset-button {
-  background: #6b7280;
-  color: white;
-  border: none;
-  padding: 11px 18px;
-  border-radius: 7px;
-}
-
-.reset-button:hover {
-  background: #4b5563;
+  .expense-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
 }
