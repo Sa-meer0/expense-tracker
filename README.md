@@ -22,9 +22,3 @@ A responsive expense tracking web application built with React and Vite. The app
 - CSS3
 - ESLint
 
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Sa-meer0/expense-tracker.git
